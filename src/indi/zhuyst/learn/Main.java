@@ -36,9 +36,9 @@ public class Main {
         }
         try {
             latch.await();
+            executor.shutdownNow();
 
             for(FutureTask<Boolean> task : tasks){
-                executor.shutdownNow();
 
                 try {
                     if(!task.get()){
