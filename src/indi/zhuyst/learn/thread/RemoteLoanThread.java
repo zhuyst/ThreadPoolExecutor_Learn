@@ -2,12 +2,14 @@ package indi.zhuyst.learn.thread;
 
 import indi.zhuyst.learn.service.RemoteLoanService;
 
-import java.util.concurrent.Callable;
+public class RemoteLoanThread extends BaseCheckThread {
 
-public class RemoteLoanThread implements Callable<Boolean>{
+    public RemoteLoanThread(int uid) {
+        super(uid);
+    }
 
     @Override
     public Boolean call() throws Exception {
-        return new RemoteLoanService().checkAuth(1);
+        return new RemoteLoanService().checkAuth(uid);
     }
 }

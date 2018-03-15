@@ -1,7 +1,5 @@
 package indi.zhuyst.learn.service;
 
-import java.util.Random;
-
 public class RemoteLoanService {
 
     public boolean checkAuth(int uid){
@@ -10,7 +8,8 @@ public class RemoteLoanService {
         System.out.println("不良贷款 - 验证开始");
         try {
             Thread.sleep(1000);
-            flag = new Random().nextBoolean();
+//            flag = new Random().nextBoolean();
+            flag = false;
         } catch (InterruptedException e) {
             System.out.println("不良贷款 - 验证终止");
             return false;

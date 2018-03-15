@@ -2,12 +2,14 @@ package indi.zhuyst.learn.thread;
 
 import indi.zhuyst.learn.service.RemotePassportService;
 
-import java.util.concurrent.Callable;
+public class RemotePassportThread extends BaseCheckThread {
 
-public class RemotePassportThread implements Callable<Boolean>{
+    public RemotePassportThread(int uid) {
+        super(uid);
+    }
 
     @Override
     public Boolean call() throws Exception {
-        return new RemotePassportService().checkAuth(1);
+        return new RemotePassportService().checkAuth(uid);
     }
 }
