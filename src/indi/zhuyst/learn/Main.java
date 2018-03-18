@@ -39,17 +39,12 @@ public class Main {
             executor.shutdownNow();
 
             for(FutureTask<Boolean> task : tasks){
-
-                try {
-                    if(!task.get()){
-                        return false;
-                    }
-                } catch (Exception e) {
+                if(!task.get()){
                     return false;
                 }
             }
 
-        } catch (InterruptedException e) {
+        } catch (Exception e) {
             return false;
         }
 
