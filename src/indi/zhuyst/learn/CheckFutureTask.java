@@ -30,6 +30,9 @@ public class CheckFutureTask extends FutureTask<Boolean>{
         }
     }
 
+    /**
+     * 在失败后调用
+     */
     private void afterFail(){
         for(int i = 0 ; i < number - 1 ; i++){
             latch.countDown();

@@ -10,18 +10,22 @@ import java.util.concurrent.*;
 
 public class Main {
 
-    public static void main(String[] args) {
-        boolean result = check();
-        System.out.println(result ? "验证成功" : "验证失败");
-    }
+    private static ThreadPoolExecutor executor;
 
-    private static boolean check(){
+    public static void main(String[] args) {
         final int poolSize = 3;
         final int maxPoolSize = poolSize * 4;
 
-        ThreadPoolExecutor executor = new ThreadPoolExecutor(poolSize,maxPoolSize,
+        executor = new ThreadPoolExecutor(poolSize,maxPoolSize,
                 1,TimeUnit.MINUTES, new LinkedBlockingQueue<>(),new MyThreadFactory());
 
+        boolean result = check();
+        System.out.println(result ? "验证成功" : "验证失败");
+
+        executor.shutdownNow();
+    }
+
+    private static boolean check(){
         int taskNumber = 3;
         int uid = 1;
 
@@ -36,7 +40,10 @@ public class Main {
         }
         try {
             latch.await();
-            executor.shutdownNow();
+
+            for(FutureTask<Boolean> task : tasks){
+                task.cancel(true);
+            }
 
             for(FutureTask<Boolean> task : tasks){
                 if(!task.get()){
