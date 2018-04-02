@@ -8,7 +8,8 @@ public class RemoteLoanService {
         System.out.println("不良贷款 - 验证开始");
         try {
             Thread.sleep(1000);
-//            flag = new Random().nextBoolean();
+            // 这里让时间最短的直接失败，方便查看测试结果
+            // flag = new Random().nextBoolean();
             flag = false;
         } catch (InterruptedException e) {
             System.out.println("不良贷款 - 验证终止");
